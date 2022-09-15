@@ -25,3 +25,11 @@ func GetUserID(c echo.Context) error {
 	}
 	return c.JSON(http.StatusOK, user)
 }
+func CreateNewUser(c echo.Context) error {
+	err := service.CreateUser(c)
+	if err != nil {
+		log.Fatal(err)
+	}
+	return c.String(http.StatusCreated, "create")
+
+}

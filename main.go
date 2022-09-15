@@ -18,6 +18,7 @@ func main() {
 	e.GET("/", hello)
 	e.GET("/users", controller.GetUsers)
 	e.GET("/user/:id", controller.GetUserID)
+	e.POST("/create/user", controller.CreateNewUser)
 	e.Logger.Fatal(e.Start(":8081"))
 }
 func hello(c echo.Context) error {
