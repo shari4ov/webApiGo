@@ -5,6 +5,18 @@ import (
 	"home/storage"
 )
 
+func GetUserByID(id int) (model.User, error) {
+	sqlStatement := `SELECT * FROM users WHERE id=$1;`
+
+	db := storage.OpenConnection()
+	row := db.QueryRow(sqlStatement, id)
+	user := model.User{}
+	err := row.Scan(&user.Id, &user.Name, &user.Surname)
+	if err != nil {
+		return user, err
+	}
+	return user, nil
+}
 func GetRepoUsers() ([]model.User, error) {
 	db := storage.OpenConnection()
 	row, err := db.Query("SELECT * FROM users")
